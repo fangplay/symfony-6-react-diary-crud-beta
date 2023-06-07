@@ -7,18 +7,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Entity\Diary;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Persistence\ManagerRegistry;
 class BackController extends AbstractController
 {
     // #[Route('/back', name: 'back_index', methods:{'GET'})]
-    // public function index(): Response
-    // {
-    //     return $this->render('back/index.html.twig', [
-    //         'controller_name' => 'BackController',
-    //     ]);
-    // }
-    #[Route('/back', name: 'back_index', methods:{'GET'})]
     public function index(ManagerRegistry $doctrine): Response
     {
         $diaries = $doctrine
@@ -41,7 +34,7 @@ class BackController extends AbstractController
         return $this->json($data);
     }
     
-    #[Route('/back', name: 'back_new', methods:{'POST'})]
+    // #[Route('/back', name: 'back_new', methods:{'POST'})]
     public function new(ManagerRegistry $doctrine, Request $request): Response
     {
         $entityManager = $doctrine->getManager();
@@ -58,7 +51,7 @@ class BackController extends AbstractController
         return $this->json('Created new diary successfully with id ' . $diary->getId());
     }
 
-    #[Route('/back/{id}', name: 'back_show', methods:{'GET'})]
+    // #[Route('/back/{id}', name: 'back_show', methods:{'GET'})]
     public function show(ManagerRegistry $doctrine, int $id): Response
     {
         $diary = $doctrine->getRepository(Diary::class)->find($id);
@@ -79,7 +72,7 @@ class BackController extends AbstractController
         return $this->json($data);
     }
 
-    #[Route('/back/{id}', name: 'back_edit', methods:{'PUT', 'PATCH'})]
+    // #[Route('/back/{id}', name: 'back_edit', methods:{'PUT', 'PATCH'})]
     public function edit(ManagerRegistry $doctrine, Request $request, int $id): Response
     {
         $entityManager = $doctrine->getManager();
@@ -107,7 +100,7 @@ class BackController extends AbstractController
         return $this->json($data);
     }
 
-    #[Route('/back/{id}', name: 'back_edit', methods:{'DELETE'})]
+    // #[Route('/back/{id}', name: 'back_edit', methods:{'DELETE'})]
     public function delete(ManagerRegistry $doctrine, int $id): Response
     {
         $entityManager = $doctrine->getManager();
